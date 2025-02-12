@@ -38,7 +38,8 @@ I also computed jerk (delta acceleration) and rotational acceleration (delta rot
 
 Because there are about twice as many samples for NORMAL driving than AGGRESSIVE driving (after combining NORMAL and SLOW), I ensured that the model would balance classes.
 #### Results:
-![](figures/conf_matrix_rf.png)
+![](figures/conf_rf.png)
+![](figures/report_rf.png)
 
 Overall, the model had a surprisingly high accuracy (###). It performed well for NORMAL driving [][][], but poorly for AGGRESSIVE driving [][][]. Given the overlap challenge described earlier, this would be expected of any model. However, it is not clear if the model’s poor performance is entirely due to this inherent challenge, or if it is simply a bad model.
 
@@ -51,7 +52,8 @@ Since driving behavior follows a time-dependent pattern, I trained a Long Short-
 #### Preprocessing
 Since using the magnitudes of acceleration and rotation condensed the information, it is possible that some important information was lost when training the Random Forest model. Because of this, the LSTM’s training included all directional acceleration and gyroscope data. Sequences of 10 seconds (20 time-steps) were fed into the model. The LSTM was trained with two stacked layers, dropout regularization to avoid overfitting, and a final sigmoid activation for binary classification.
 #### Results:
-![](figures/conf_matrix_lstm.png)
+![](figures/conf_lstm.png)
+![](figures/report_lstm.png)
 
 Surprisingly, performance was rather similar to that of the Random Forest model [accuracy###]. The LSTM had higher precision and recall for both NORMAL (###, ###) and AGGRESSIVE (###, ###) driving, but still struggled to classify AGGRESSIVE driving correctly. While the model could be refined to have improved results, I suspect that it is simply facing the same challenge that the Random Forest faced (an issue with class overlap) and efforts to improve performance – without overfitting – would have diminishing returns.
 ## Conclusion
