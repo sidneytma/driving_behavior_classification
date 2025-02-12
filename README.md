@@ -41,7 +41,7 @@ Because there are about twice as many samples for NORMAL driving than AGGRESSIVE
 ![](figures/conf_rf.png)
 ![](figures/report_rf.png)
 
-Overall, the model had a surprisingly high accuracy (###). It performed well for NORMAL driving [][][], but poorly for AGGRESSIVE driving [][][]. Given the overlap challenge described earlier, this would be expected of any model. However, it is not clear if the model’s poor performance is entirely due to this inherent challenge, or if it is simply a bad model.
+Overall, the model had a surprisingly high accuracy (79%). It performed well for NORMAL driving (84% precision, 87% recall), but poorly for AGGRESSIVE driving (61% precision, 56% recall). Given the overlap challenge described earlier, this would be expected of any model. However, it is not clear if the model’s poor performance is entirely due to this inherent challenge, or if it is simply a bad model.
 
 ![](figures/feature_importance.png)
 
@@ -55,6 +55,6 @@ Since using the magnitudes of acceleration and rotation condensed the informatio
 ![](figures/conf_lstm.png)
 ![](figures/report_lstm.png)
 
-Surprisingly, performance was rather similar to that of the Random Forest model [accuracy###]. The LSTM had higher precision and recall for both NORMAL (###, ###) and AGGRESSIVE (###, ###) driving, but still struggled to classify AGGRESSIVE driving correctly. While the model could be refined to have improved results, I suspect that it is simply facing the same challenge that the Random Forest faced (an issue with class overlap) and efforts to improve performance – without overfitting – would have diminishing returns.
+Surprisingly, performance was rather similar to that of the Random Forest model (80% accuracy). The LSTM generally had better precision and recall for both NORMAL (88% precision, 83% recall) and AGGRESSIVE (59% precision, 69% recall) driving, but still struggled to classify AGGRESSIVE driving correctly. While the model could be refined to have improved results, I suspect that it is simply facing the same challenge that the Random Forest faced (an issue with class overlap) and efforts to improve performance – without overfitting – would have diminishing returns.
 ## Conclusion
 This project explored the feasibility of detecting aggressive driving using smartphone motion sensors. Both Random Forest and LSTM models successfully identified NORMAL behavior but struggled with AGGRESSIVE behavior due to label overlap. A critical issue introduced by this project is determining a reasonable window size – short windows (<2 sec) lack context, while long windows (>5 min) are impractical. Surprisingly, jerk and rotational acceleration were not important features, likely because they were 1) computed from norms rather than directional vectors and 2) averaged over windows rather than calculated instantaneously. With additional data, including velocity or even sound (e.g., engine or skid noises), model performance could likely improve significantly.
